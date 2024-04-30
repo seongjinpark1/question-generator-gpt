@@ -4,6 +4,11 @@ import { Dispatch, SetStateAction, useState, useTransition } from 'react';
 import { getGptAnswer } from '../actions/get-gpt';
 import { ExamListProps } from '../Generate';
 import Loading from '@/components/Loading';
+import { addDoc, collection } from 'firebase/firestore';
+
+import formatDate from '@/utils/format/formatDate';
+import fireStore from '@/firebase/fireStore';
+import { saveDb } from '@/firebase/firebaseApi';
 
 interface QuestionProps {
   setExamList: Dispatch<SetStateAction<ExamListProps | null>>;
@@ -13,6 +18,7 @@ let count = 0;
 const Question = ({ setExamList, setIsShowBlack }: QuestionProps) => {
   const [isPending, startTransition] = useTransition();
   const [inputValue, setInputValue] = useState('');
+  const { date } = formatDate();
 
   const handleError = () => {
     if (count === 3) {
@@ -22,6 +28,7 @@ const Question = ({ setExamList, setIsShowBlack }: QuestionProps) => {
     handleFetch();
     count++;
   };
+
   const handleFetch = () => {
     try {
       startTransition(async () => {
@@ -43,6 +50,7 @@ const Question = ({ setExamList, setIsShowBlack }: QuestionProps) => {
           }
 
           setExamList(parseData);
+          saveDb(parseData, date, inputValue);
         } catch (err) {
           handleError();
         }
@@ -50,10 +58,6 @@ const Question = ({ setExamList, setIsShowBlack }: QuestionProps) => {
     } catch (err) {
       handleError();
     }
-  };
-
-  const handleFetchGpt = () => {
-    handleFetch();
   };
 
   return (
@@ -85,7 +89,7 @@ const Question = ({ setExamList, setIsShowBlack }: QuestionProps) => {
             color: 'white',
             borderColor: 'black',
           }}
-          onClick={handleFetchGpt}
+          onClick={handleFetch}
         >
           <Text color="white">Generate</Text>
         </Button>

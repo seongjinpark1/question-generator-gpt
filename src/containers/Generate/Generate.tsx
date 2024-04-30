@@ -17,9 +17,20 @@ interface ExamItemProps {
   question: string;
   answer: string;
 }
+
+export interface HistoryListProps {
+  id: number;
+  content: {
+    question: string;
+    answer: ExamListProps;
+  };
+  created_at: string;
+}
+
 const Generate = () => {
   const [examList, setExamList] = useState<ExamListProps | null>(null);
   const [isShowBlack, setIsShowBlack] = useState(false);
+
   return (
     <>
       <Box zIndex={2} position="relative" p="16px" w="100%">
@@ -29,7 +40,10 @@ const Generate = () => {
           exit={{ opacity: 0 }}
         >
           <Flex w="100%" h="calc(100vh - 32px)" bg="white" borderRadius="16px">
-            <History />
+            <History
+              setExamList={setExamList}
+              setIsShowBlack={setIsShowBlack}
+            />
             <Question
               setExamList={setExamList}
               setIsShowBlack={setIsShowBlack}
