@@ -19,7 +19,7 @@ export async function getGptAnswer({ data }: getGptAnswerProps) {
         Authorization: `Bearer ${OPEN_AI_KEY}`,
       },
       body: JSON.stringify({
-        model: 'gpt-4-turbo',
+        model: 'gpt-3.5-turbo',
         messages: [
           {
             role: 'system',
@@ -42,7 +42,7 @@ export async function getGptAnswer({ data }: getGptAnswerProps) {
 
           {
             role: 'system',
-            content: `너는 천재 개발자이고 실수는 절대 안해, 유저는 스터디한 내용을 정리한 걸 질문을 할거야 그러면  그거를 토대로 5문제와 답을 알려줘야해  답변의 형식은
+            content: `너는 천재 개발자이고 실수는 절대 안해, 유저는 스터디한 내용을 정리한 걸 질문을 할거야 그러면  그거를 토대로 무조건5문제와 답을 알려줘야하고 한글로 질문,답변해야해 답변의 형식은
             {
               "data": [
                 {
