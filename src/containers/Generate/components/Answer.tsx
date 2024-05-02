@@ -1,4 +1,3 @@
-import useMenuAnimation from '@/hooks/useMenuAnimation';
 import { Box, Center, Flex, Text } from '@chakra-ui/react';
 import { ExamListProps } from '../Generate';
 
@@ -14,6 +13,7 @@ import {
   useEffect,
   useState,
 } from 'react';
+import AnswerCount from './AnswerCount';
 
 interface AnswerProps {
   examList: ExamListProps | null;
@@ -21,7 +21,6 @@ interface AnswerProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 const Answer = ({ examList, isOpen, setIsOpen }: AnswerProps) => {
-  const { scope } = useMenuAnimation(isOpen);
   const [activeIdx, setActiveIdx] = useState(0);
   const [showAnswer, setShowAnswer] = useState<boolean[]>(
     new Array(examList?.data?.length).fill(false)
@@ -36,6 +35,7 @@ const Answer = ({ examList, isOpen, setIsOpen }: AnswerProps) => {
 
   const handleReTry = () => {
     setIsOpen(false);
+    setShowAnswer(new Array(examList?.data?.length).fill(false));
   };
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Answer = ({ examList, isOpen, setIsOpen }: AnswerProps) => {
   }, [handleShowAnswer, isOpen]);
 
   return (
-    <Box display={isOpen ? 'block' : 'none'} ref={scope}>
+    <Box display={isOpen ? 'block' : 'none'}>
       <Box
         className="container"
         w="100%"
@@ -137,15 +137,25 @@ const Answer = ({ examList, isOpen, setIsOpen }: AnswerProps) => {
                   border="1px solid yellow"
                   w="100%"
                   h="200px"
+                  overflowY="auto"
                 >
-                  <Text color="yellow" fontSize="30px">
-                    A. {list.answer}
-                  </Text>
+                  <Text
+                    color="yellow"
+                    fontSize="30px"
+                    wordBreak="break-all"
+                    dangerouslySetInnerHTML={{
+                      __html: `A. ${list.answer}`,
+                    }}
+                  />
                 </Box>
               )}
             </SwiperSlide>
           ))}
         </SwiperWrapper>
+        <AnswerCount
+          count={examList?.data?.length || 0}
+          currentIdx={activeIdx + 1}
+        />
       </Box>
     </Box>
   );
