@@ -27,7 +27,7 @@ const useValidTime = () => {
   const isValidTime = getValidTime();
   const diffTime = getDiffValidTime();
 
-  return { isValidTime, diffTime };
+  return { isValidTime, diffTime, today, studyDate };
 };
 
 export default useValidTime;
