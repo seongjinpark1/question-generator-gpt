@@ -7,6 +7,8 @@ import {
   QuerySnapshot,
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   getDocs,
 } from 'firebase/firestore';
 import fireStore from './fireStore';
@@ -17,7 +19,6 @@ export const saveDb = async (
   inputValue: string
 ) => {
   await addDoc(collection(fireStore, 'history'), {
-    id: Date.now(),
     content: {
       question: inputValue.slice(0, 100),
       answer: parseData,
@@ -31,11 +32,15 @@ export const getHistories = async () => {
     (results: QuerySnapshot) => {
       let tempList: HistoryListProps[] = [];
       results.forEach((doc: QueryDocumentSnapshot) => {
-        const data = doc.data() as HistoryListProps;
+        const data = { id: doc.id, ...doc.data() } as HistoryListProps;
         tempList.push(data);
       });
       return tempList;
     }
   );
   return res;
+};
+
+export const deleteHistory = async (id: string) => {
+  await deleteDoc(doc(fireStore, 'history', id));
 };

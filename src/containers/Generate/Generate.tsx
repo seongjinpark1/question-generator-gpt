@@ -13,13 +13,13 @@ export interface ExamListProps {
 }
 
 interface ExamItemProps {
-  id: number;
+  id: string;
   question: string;
   answer: string;
 }
 
 export interface HistoryListProps {
-  id: number;
+  id: string;
   content: {
     question: string;
     answer: ExamListProps;
@@ -28,6 +28,7 @@ export interface HistoryListProps {
 }
 
 const Generate = () => {
+  const [historyList, setHistoryList] = useState<HistoryListProps[]>([]);
   const [examList, setExamList] = useState<ExamListProps | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -40,8 +41,17 @@ const Generate = () => {
           exit={{ opacity: 0 }}
         >
           <Flex w="100%" h="calc(100vh - 32px)" bg="white" borderRadius="16px">
-            <History setExamList={setExamList} setIsOpen={setIsOpen} />
-            <Question setExamList={setExamList} setIsOpen={setIsOpen} />
+            <History
+              setExamList={setExamList}
+              setIsOpen={setIsOpen}
+              historyList={historyList}
+              setHistoryList={setHistoryList}
+            />
+            <Question
+              setExamList={setExamList}
+              setIsOpen={setIsOpen}
+              setHistoryList={setHistoryList}
+            />
           </Flex>
         </motion.div>
         <Answer examList={examList} isOpen={isOpen} setIsOpen={setIsOpen} />
