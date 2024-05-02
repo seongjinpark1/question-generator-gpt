@@ -3,8 +3,10 @@
 import { Center, Flex } from '@chakra-ui/react';
 
 import RobotComponents from './components/RobotComponents';
+import useValidTime from '@/hooks/useValidTime';
 
 const Home = () => {
+  useValidTime();
   return (
     <Center
       as="main"
