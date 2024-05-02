@@ -8,10 +8,6 @@ const useValidTime = () => {
     const isWithinRange =
       today.isAfter(studyDate) &&
       today.isBefore(studyDate.add(1, 'hour').add(30, 'minute'));
-
-    console.log({ today });
-    console.log({ studyDate });
-    console.log({ isWithinRange });
     return isWithinRange;
   };
 

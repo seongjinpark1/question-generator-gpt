@@ -6,7 +6,10 @@ import RobotComponents from './components/RobotComponents';
 import useValidTime from '@/hooks/useValidTime';
 
 const Home = () => {
-  useValidTime();
+  const { today, studyDate, isValidTime } = useValidTime();
+  console.log({ today });
+  console.log({ studyDate });
+  console.log({ isValidTime });
   return (
     <Center
       as="main"
