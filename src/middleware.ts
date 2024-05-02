@@ -9,7 +9,8 @@ export async function middleware(request: NextRequest) {
     const isWithinRange =
       today.isAfter(studyDate) &&
       today.isBefore(studyDate.add(1, 'hour').add(30, 'minute'));
-    return isWithinRange;
+    // return isWithinRange ;
+    return true;
   };
 
   if (!isValidTime() && nextUrl.pathname !== '/') {
