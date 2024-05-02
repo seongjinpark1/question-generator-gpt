@@ -25,7 +25,13 @@ const History = ({ setExamList, setIsOpen }: HistoryProps) => {
   useEffect(() => {
     startTransition(async () => {
       const res = await getHistories();
-      setHistoryList(res);
+      const sortDate = res.toSorted((item1, item2) => {
+        return (
+          Number(new Date(item2.created_at)) -
+          Number(new Date(item1.created_at))
+        );
+      });
+      setHistoryList(sortDate);
     });
   }, []);
   return (
