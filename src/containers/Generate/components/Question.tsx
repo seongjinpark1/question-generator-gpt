@@ -23,6 +23,7 @@ const Question = ({
   const [isPending, startTransition] = useTransition();
   const [inputValue, setInputValue] = useState('');
   const { date } = formatDate();
+  const isDisabled = inputValue.replaceAll(' ', '').length === 0;
 
   const handleError = () => {
     if (count === 3) {
@@ -103,9 +104,14 @@ const Question = ({
           px="16px"
           h="32px"
           bg="black"
-          cursor="pointer"
+          cursor={isDisabled ? 'not-allowed' : 'pointer'}
           _hover={{
             opacity: '0.7',
+          }}
+          isDisabled={isDisabled}
+          _disabled={{
+            bg: '#CBD5E0',
+            border: 'none',
           }}
           isLoading={isPending}
           _loading={{
