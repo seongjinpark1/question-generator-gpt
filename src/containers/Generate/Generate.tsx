@@ -29,7 +29,7 @@ export interface HistoryListProps {
 
 const Generate = () => {
   const [examList, setExamList] = useState<ExamListProps | null>(null);
-  const [isShowBlack, setIsShowBlack] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
@@ -40,17 +40,11 @@ const Generate = () => {
           exit={{ opacity: 0 }}
         >
           <Flex w="100%" h="calc(100vh - 32px)" bg="white" borderRadius="16px">
-            <History
-              setExamList={setExamList}
-              setIsShowBlack={setIsShowBlack}
-            />
-            <Question
-              setExamList={setExamList}
-              setIsShowBlack={setIsShowBlack}
-            />
+            <History setExamList={setExamList} setIsOpen={setIsOpen} />
+            <Question setExamList={setExamList} setIsOpen={setIsOpen} />
           </Flex>
         </motion.div>
-        <Answer examList={examList} isShowBlack={isShowBlack} />
+        <Answer examList={examList} isOpen={isOpen} setIsOpen={setIsOpen} />
       </Box>
     </>
   );

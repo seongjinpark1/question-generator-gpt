@@ -4,18 +4,17 @@ import { Dispatch, SetStateAction, useState, useTransition } from 'react';
 import { getGptAnswer } from '../actions/get-gpt';
 import { ExamListProps } from '../Generate';
 import Loading from '@/components/Loading';
-import { addDoc, collection } from 'firebase/firestore';
 
 import formatDate from '@/utils/format/formatDate';
-import fireStore from '@/firebase/fireStore';
+
 import { saveDb } from '@/firebase/firebaseApi';
 
 interface QuestionProps {
   setExamList: Dispatch<SetStateAction<ExamListProps | null>>;
-  setIsShowBlack: Dispatch<SetStateAction<boolean>>;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 let count = 0;
-const Question = ({ setExamList, setIsShowBlack }: QuestionProps) => {
+const Question = ({ setExamList, setIsOpen }: QuestionProps) => {
   const [isPending, startTransition] = useTransition();
   const [inputValue, setInputValue] = useState('');
   const { date } = formatDate();
@@ -42,15 +41,14 @@ const Question = ({ setExamList, setIsShowBlack }: QuestionProps) => {
           const parseData = JSON.parse(data);
 
           if (!parseData.error) {
-            setIsShowBlack(true);
+            setIsOpen(true);
           }
           if (parseData.error) {
             alert(parseData.error);
             return;
           }
 
-          setExamList(parseData);
-          saveDb(parseData, date, inputValue);
+          onSuccess(parseData);
         } catch (err) {
           handleError();
         }
@@ -58,6 +56,12 @@ const Question = ({ setExamList, setIsShowBlack }: QuestionProps) => {
     } catch (err) {
       handleError();
     }
+  };
+
+  const onSuccess = (parseData: ExamListProps) => {
+    setExamList(parseData);
+    setInputValue('');
+    saveDb(parseData, date, inputValue);
   };
 
   return (
@@ -103,6 +107,7 @@ const Question = ({ setExamList, setIsShowBlack }: QuestionProps) => {
         borderRadius="16px"
         fontSize="20px"
         onChange={(e) => setInputValue(e.target.value)}
+        value={inputValue}
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
             if (e.nativeEvent.isComposing) return;

@@ -11,15 +11,15 @@ import { getHistories } from '@/firebase/firebaseApi';
 
 interface HistoryProps {
   setExamList: Dispatch<SetStateAction<ExamListProps | null>>;
-  setIsShowBlack: Dispatch<SetStateAction<boolean>>;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
-const History = ({ setExamList, setIsShowBlack }: HistoryProps) => {
+const History = ({ setExamList, setIsOpen }: HistoryProps) => {
   const [isPending, startTransition] = useTransition();
   const [historyList, setHistoryList] = useState<HistoryListProps[]>([]);
 
   const handleSelectHistory = (data: HistoryListProps) => {
     setExamList(data.content.answer);
-    setIsShowBlack(true);
+    setIsOpen(true);
   };
 
   useEffect(() => {

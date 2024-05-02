@@ -7,14 +7,21 @@ import 'swiper/css/navigation';
 import 'swiper/css/keyboard';
 import { Swiper as SwiperWrapper, SwiperSlide } from 'swiper/react';
 import { Navigation, Keyboard } from 'swiper/modules';
-import { useCallback, useEffect, useState } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 
 interface AnswerProps {
   examList: ExamListProps | null;
-  isShowBlack: boolean;
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
-const Answer = ({ examList, isShowBlack }: AnswerProps) => {
-  const { scope } = useMenuAnimation(isShowBlack);
+const Answer = ({ examList, isOpen, setIsOpen }: AnswerProps) => {
+  const { scope } = useMenuAnimation(isOpen);
   const [activeIdx, setActiveIdx] = useState(0);
   const [showAnswer, setShowAnswer] = useState<boolean[]>(
     new Array(examList?.data?.length).fill(false)
@@ -27,19 +34,23 @@ const Answer = ({ examList, isShowBlack }: AnswerProps) => {
     setShowAnswer(copyList);
   }, [activeIdx, showAnswer]);
 
+  const handleReTry = () => {
+    setIsOpen(false);
+  };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isShowBlack) return;
+      if (!isOpen) return;
       if (e.key === ' ') {
         handleShowAnswer();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleShowAnswer, isShowBlack]);
+  }, [handleShowAnswer, isOpen]);
 
   return (
-    <Box display={isShowBlack ? 'block' : 'none'} ref={scope}>
+    <Box display={isOpen ? 'block' : 'none'} ref={scope}>
       <Box
         className="container"
         w="100%"
@@ -51,22 +62,39 @@ const Answer = ({ examList, isShowBlack }: AnswerProps) => {
         zIndex={3}
         p="32px"
       >
-        <Center
+        <Flex
           position="fixed"
+          alignItems="center"
           right={20}
           top={20}
           zIndex={4}
-          bg="yellow"
-          borderRadius="50%"
-          w="80px"
-          h="80px"
-          cursor="pointer"
-          onClick={handleShowAnswer}
+          gap="10px"
         >
-          <Text fontSize="16px" fontWeight={500}>
-            {showAnswer[activeIdx] ? '해설 숨기기' : '해설 보기'}
-          </Text>
-        </Center>
+          <Center
+            bg="#F56565"
+            borderRadius="50%"
+            w="70px"
+            h="70px"
+            cursor="pointer"
+            onClick={handleReTry}
+          >
+            <Text fontSize="16px" fontWeight={500}>
+              ReTry
+            </Text>
+          </Center>
+          <Center
+            bg="#FAF089"
+            borderRadius="50%"
+            w="70px"
+            h="70px"
+            cursor="pointer"
+            onClick={handleShowAnswer}
+          >
+            <Text fontSize="16px" fontWeight={500}>
+              {showAnswer[activeIdx] ? 'Hide' : 'Answer'}
+            </Text>
+          </Center>
+        </Flex>
         <SwiperWrapper
           keyboard
           navigation
