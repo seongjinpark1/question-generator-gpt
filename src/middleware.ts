@@ -13,7 +13,7 @@ export async function middleware(request: NextRequest) {
   };
 
   if (!isValidTime() && nextUrl.pathname !== '/') {
-    // return NextResponse.redirect(new URL('/', request.url));
+    return NextResponse.redirect(new URL('/', request.url));
   }
 }
 

@@ -25,8 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* <CommonLayout>{isValidTime ? children : notopen}</CommonLayout> */}
-        <CommonLayout>{children}</CommonLayout>
+        <CommonLayout>{isValidTime ? children : notopen}</CommonLayout>
       </body>
     </html>
   );
