@@ -127,12 +127,6 @@ const Question = ({
         fontSize="20px"
         onChange={(e) => setInputValue(e.target.value)}
         value={inputValue}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            if (e.nativeEvent.isComposing) return;
-            handleFetch();
-          }
-        }}
         _focusVisible={{
           outline: 'none',
         }}

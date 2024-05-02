@@ -39,7 +39,10 @@ export async function getGptAnswer({ data }: getGptAnswerProps) {
   "error":'정리한 스터디 내용을 입력해주세요.'
 }`,
           },
-          { role: 'assistant', content: '무조건 5문제를 만들어' },
+          {
+            role: 'system',
+            content: '답변할때 * 문자는 다 삭제해줘',
+          },
 
           {
             role: 'system',
