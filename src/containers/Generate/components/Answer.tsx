@@ -14,6 +14,7 @@ import {
   useState,
 } from 'react';
 import AnswerCount from './AnswerCount';
+import Swiper from 'swiper';
 
 interface AnswerProps {
   examList: ExamListProps | null;
@@ -21,6 +22,8 @@ interface AnswerProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 const Answer = ({ examList, isOpen, setIsOpen }: AnswerProps) => {
+  const [swiperEvent, setSwiperEvent] = useState<Swiper>();
+
   const [activeIdx, setActiveIdx] = useState(0);
   const [showAnswer, setShowAnswer] = useState<boolean[]>(
     new Array(examList?.data?.length).fill(false)
@@ -35,6 +38,8 @@ const Answer = ({ examList, isOpen, setIsOpen }: AnswerProps) => {
 
   const handleReTry = () => {
     setIsOpen(false);
+    setActiveIdx(0);
+    swiperEvent?.slideTo(0);
     setShowAnswer(new Array(examList?.data?.length).fill(false));
   };
 
@@ -102,6 +107,7 @@ const Answer = ({ examList, isOpen, setIsOpen }: AnswerProps) => {
           style={{
             height: '100%',
           }}
+          onBeforeInit={(e) => setSwiperEvent(e)}
           onSlideChange={(e) => setActiveIdx(e.activeIndex)}
         >
           {examList?.data?.map((list, idx) => (
@@ -144,7 +150,7 @@ const Answer = ({ examList, isOpen, setIsOpen }: AnswerProps) => {
                     fontSize="30px"
                     wordBreak="break-all"
                     dangerouslySetInnerHTML={{
-                      __html: `A. ${list.answer}`,
+                      __html: `${list.answer.replaceAll('\n', '<br />')}`,
                     }}
                   />
                 </Box>

@@ -43,9 +43,12 @@ const History = ({
     setIsOpen(true);
   };
 
-  const handleDeleteHistory = (e: MouseEvent<HTMLImageElement>, id: string) => {
+  const handleDeleteHistory = async (
+    e: MouseEvent<HTMLImageElement>,
+    id: string
+  ) => {
     e.stopPropagation();
-    deleteHistory(id);
+    await deleteHistory(id);
     handleGetHistory();
   };
 
