@@ -26,9 +26,9 @@ export default function RootLayout({
       <body className={inter.className}>
         {isValidTime ? 'true' : 'false'}
         <br />
-        {studyDate.format('YYYY-MM-DD, HH:mm:ssZ')}
+        {today.tz().format('YYYY-MM-DD, HH:mm:ssZ')}
         <br />
-        {today.format('YYYY-MM-DD, HH:mm:ssZ')}
+        {studyDate.format('YYYY-MM-DD, HH:mm:ssZ')}
         <br />
         {/* <CommonLayout>{isValidTime ? children : notopen}</CommonLayout> */}
       </body>
