@@ -33,9 +33,9 @@ export default function RootLayout({
         <br />
         {isValidTime ? 'true' : 'false'}
         <br />
-        {today.format('YYYY-MM-DD, HH:mm:ss')}
+        {today.format('YYYY-MM-DD, HH:mm:ssZ')}
         <br />
-        {studyDate.format('YYYY-MM-DD, HH:mm:ss')}
+        {studyDate.format('YYYY-MM-DD, HH:mm:ssZ')}
         <br />
         {/* {notopen} */}
         {/* <CommonLayout>{isValidTime ? children : notopen}</CommonLayout> */}
