@@ -15,7 +15,6 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-  notopen: React.ReactNode;
 }>) {
   return (
     <html lang="en">
