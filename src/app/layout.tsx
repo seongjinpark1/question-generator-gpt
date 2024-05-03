@@ -21,6 +21,7 @@ export default function RootLayout({
   notopen: React.ReactNode;
 }>) {
   const { isValidTime, studyDate, today } = useValidTime();
+  console.log(studyDate.format('YYYY-MM-DD, HH:mm:ssZ'));
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -30,7 +31,7 @@ export default function RootLayout({
         <br />
         {studyDate.format('YYYY-MM-DD, HH:mm:ssZ')}
         <br />
-        {notopen}
+        {/* {notopen} */}
         {/* <CommonLayout>{isValidTime ? children : notopen}</CommonLayout> */}
       </body>
     </html>
