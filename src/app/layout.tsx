@@ -25,6 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        {today.isAfter(studyDate)}
+        <br />
+        {today.isBefore(studyDate.add(1, 'hour').add(30, 'minute'))}
+        <br />
         {isValidTime ? 'true' : 'false'}
         <br />
         {today.format('YYYY-MM-DD, HH:mm:ss')}
