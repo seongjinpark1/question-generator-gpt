@@ -5,6 +5,7 @@ import './globals.css';
 import CommonLayout from '@/components/Layout/CommonLayout';
 
 import useValidTime from '@/hooks/useValidTime';
+import dayjs from 'dayjs';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -33,7 +34,7 @@ export default function RootLayout({
         <br />
         {isValidTime ? 'true' : 'false'}
         <br />
-        {today.format('YYYY-MM-DD, HH:mm:ssZ')}
+        {dayjs().tz().format('YYYY-MM-DD, HH:mm:ssZ')}
         <br />
         {studyDate.format('YYYY-MM-DD, HH:mm:ssZ')}
         <br />
