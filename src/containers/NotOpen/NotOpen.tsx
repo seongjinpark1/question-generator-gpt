@@ -4,8 +4,8 @@ import { Center, Text } from '@chakra-ui/react';
 
 const NotOpen = () => {
   const { today, studyDate, isValidTime } = useValidTime();
-  console.log('today', today.format('YYYY-MM-DD, HH:mm:zz'));
-  console.log('study', studyDate.format('YYYY-MM-DD, HH:mm:zz'));
+  console.log('today', today.format('YYYY-MM-DD, HH:mm:ssZ'));
+  console.log('study', studyDate.format('YYYY-MM-DD, HH:mm:ssZ'));
   console.log('invalidTime', isValidTime);
   return (
     <Center

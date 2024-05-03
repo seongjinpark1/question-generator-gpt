@@ -20,11 +20,17 @@ export default function RootLayout({
   children: React.ReactNode;
   notopen: React.ReactNode;
 }>) {
-  const { isValidTime } = useValidTime();
+  const { today, studyDate, isValidTime } = useValidTime();
+  console.log('today', today.format('YYYY-MM-DD, HH:mm:ssZ'));
+  console.log('study', studyDate.format('YYYY-MM-DD, HH:mm:ssZ'));
+  console.log('invalidTime', isValidTime);
 
   return (
     <html lang="en">
       <body className={inter.className}>
+        {today.format('YYYY-MM-DD, HH:mm:ssZ')}
+        {studyDate.format('YYYY-MM-DD, HH:mm:ssZ')}
+        {isValidTime}
         <CommonLayout>{isValidTime ? children : notopen}</CommonLayout>
       </body>
     </html>
