@@ -5,6 +5,7 @@ import './globals.css';
 import CommonLayout from '@/components/Layout/CommonLayout';
 import NotOpenPage from './@notopen/page';
 import useValidTime from '@/hooks/useValidTime';
+import dayjs from 'dayjs';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,10 +29,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {today.format('YYYY-MM-DD, HH:mm:ssZ')}
+        {dayjs().format('YYYY-MM-DD, HH:mm:ssZ')} <br />
         {studyDate.format('YYYY-MM-DD, HH:mm:ssZ')}
-        {isValidTime}
-        <CommonLayout>{isValidTime ? children : notopen}</CommonLayout>
+        <br />
+        test{isValidTime ? 'true' : 'false'}
+        {/* <CommonLayout>{isValidTime ? children : notopen}</CommonLayout> */}
       </body>
     </html>
   );
