@@ -22,13 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
   notopen: React.ReactNode;
 }>) {
-  dayjs.extend(utc);
-  dayjs.extend(timezone);
-  dayjs.tz.setDefault('Asia/Seoul');
   const { today, studyDate, isValidTime } = useValidTime();
-  console.log('today', today.format('YYYY-MM-DD, HH:mm:ssZ'));
-  console.log('study', studyDate.format('YYYY-MM-DD, HH:mm:ssZ'));
-  console.log('invalidTime', isValidTime);
 
   return (
     <html lang="en">

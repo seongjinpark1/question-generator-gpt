@@ -1,9 +1,14 @@
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault('Asia/Seoul');
 
 const useValidTime = () => {
   const today = dayjs();
   const studyDate = dayjs('2024-05-03T09:17:00'); // 해당 날짜라 시간만 수정!
-
   const getValidTime = () => {
     const isWithinRange =
       today.isAfter(studyDate) &&
