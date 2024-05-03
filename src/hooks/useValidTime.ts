@@ -8,7 +8,7 @@ dayjs.tz.setDefault('Asia/Seoul');
 
 const useValidTime = () => {
   const today = dayjs();
-  const studyDate = dayjs('2024-05-03T09:17:00'); // 해당 날짜라 시간만 수정!
+  const studyDate = dayjs('2024-05-03T09:43:00'); // 해당 날짜라 시간만 수정!
   const getValidTime = () => {
     const isWithinRange =
       today.isAfter(studyDate) &&
@@ -32,7 +32,7 @@ const useValidTime = () => {
   const isValidTime = getValidTime();
   const diffTime = getDiffValidTime();
 
-  return { isValidTime, diffTime, today, studyDate };
+  return { isValidTime, diffTime };
 };
 
 export default useValidTime;
