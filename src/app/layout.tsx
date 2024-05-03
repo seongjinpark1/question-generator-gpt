@@ -6,7 +6,8 @@ import CommonLayout from '@/components/Layout/CommonLayout';
 import NotOpenPage from './@notopen/page';
 import useValidTime from '@/hooks/useValidTime';
 import dayjs from 'dayjs';
-
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -21,6 +22,9 @@ export default function RootLayout({
   children: React.ReactNode;
   notopen: React.ReactNode;
 }>) {
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
+  dayjs.tz.setDefault('Asia/Seoul');
   const { today, studyDate, isValidTime } = useValidTime();
   console.log('today', today.format('YYYY-MM-DD, HH:mm:ssZ'));
   console.log('study', studyDate.format('YYYY-MM-DD, HH:mm:ssZ'));
@@ -29,6 +33,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        {dayjs().tz().format('YYYY-MM-DD, HH:mm:ssZ')}
+        <br />
         {dayjs().format('YYYY-MM-DD, HH:mm:ssZ')} <br />
         {studyDate.format('YYYY-MM-DD, HH:mm:ssZ')}
         <br />
