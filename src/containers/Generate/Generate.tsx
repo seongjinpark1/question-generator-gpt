@@ -34,13 +34,13 @@ const Generate = () => {
 
   return (
     <>
-      <Box zIndex={2} position="relative" p="16px" w="100%">
+      <Box zIndex={2} position="relative" w="100%">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <Flex w="100%" h="calc(100vh - 32px)" bg="white" borderRadius="16px">
+          <Flex w="100%" h="100vh" bg="white">
             <History
               setExamList={setExamList}
               setIsOpen={setIsOpen}

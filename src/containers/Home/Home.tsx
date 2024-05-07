@@ -1,11 +1,17 @@
 'use client';
 
 import { Center, Flex, Text } from '@chakra-ui/react';
+import Image from 'next/image';
 
-import RobotComponents from './components/RobotComponents';
-import useValidTime from '@/hooks/useValidTime';
 import Link from 'next/link';
 
+const LINK_LIST = [
+  {
+    id: 0,
+    name: '스터디 질문 만들기',
+    href: '/generate',
+  },
+];
 const Home = () => {
   return (
     <Center
@@ -16,6 +22,26 @@ const Home = () => {
       position="relative"
       zIndex={2}
     >
+      <Flex
+        w="100%"
+        position="absolute"
+        top="80px"
+        left="50%"
+        alignItems="center"
+        justifyContent="center"
+        transform="translateX(-50%)"
+      >
+        <Text fontSize="60px" fontWeight={500}>
+          STUDY GPT
+        </Text>
+        <Image
+          src="/images/cute-robot.webp"
+          alt="robot"
+          width={100}
+          height={100}
+          priority
+        />
+      </Flex>
       <Center
         w="100%"
         h="100%"
@@ -23,32 +49,38 @@ const Home = () => {
         justifyContent="center"
         position="relative"
       >
-        <Link
-          href="/generate"
-          style={{
-            width: '60%',
-            height: '55vh',
-          }}
-        >
-          <Center
-            border="1px solid"
-            h="100%"
-            bg="black"
-            borderRadius="100px"
-            boxShadow="3px 3px 3px rgba(0,0,0,0.4)"
-            _active={{
-              border: 'none',
-            }}
-            _hover={{
-              transform: 'translateY(-20px)',
-            }}
-            transition="0.3s"
-          >
-            <Text fontSize="5vw" color="white" textDecoration="none">
-              질문 입력하기
-            </Text>
-          </Center>
-        </Link>
+        {/* <SimpleGrid columns={2} gap={15} w="100%" px="16px"> */}
+        {LINK_LIST.map((list) => {
+          return (
+            <Link
+              key={list.id}
+              href={list.href}
+              style={{
+                width: '50%',
+              }}
+            >
+              <Center
+                h="60px"
+                bg="black"
+                borderRadius="100px"
+                boxShadow="3px 3px 3px rgba(0,0,0,0.4)"
+                border="none"
+                _active={{
+                  border: 'none',
+                }}
+                _hover={{
+                  transform: 'translateY(-5px)',
+                }}
+                transition="0.3s"
+              >
+                <Text fontSize="2vw" color="white" textDecoration="none">
+                  {list.name}
+                </Text>
+              </Center>
+            </Link>
+          );
+        })}
+        {/* </SimpleGrid> */}
       </Center>
     </Center>
   );
