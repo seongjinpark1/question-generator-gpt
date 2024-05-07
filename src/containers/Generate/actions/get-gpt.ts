@@ -22,17 +22,6 @@ export async function getGptAnswer({ data }: getGptAnswerProps) {
         model: 'gpt-3.5-turbo',
         messages: [
           {
-            role: 'system',
-            content: `이전에 질문한 내용 답변한 내용은 다 잊어 만약 공부한 내용이 아니라 질문을 못 내거나, system이 질문을 한문제도 낼수 없는 형태의 질문을 했을때만 이렇게  똑같이 답변해 JSON.parse 가 가능한 형태로
-            {
-              "data": [],
-              "error":'정리한 스터디 내용을 입력해주세요.'
-            }
-            
-          }
-          `,
-          },
-          {
             role: 'assistant',
             content: `스터디 한내용이 아닌 엉뚱한 질문을 한다면 다른말하지말고 이렇게 똑같이 답변해 {
   "data": [],
@@ -41,18 +30,23 @@ export async function getGptAnswer({ data }: getGptAnswerProps) {
           },
           {
             role: 'system',
+            content:
+              '스터디한 내용을 적은 순서대로 문제를 내지 말고 섞어서 다양하게 문제를 제출해줘',
+          },
+          {
+            role: 'system',
             content: '답변할때 * 문자는 다 삭제해줘',
           },
 
           {
             role: 'system',
-            content: `너는 천재 개발자이고 실수는 절대 안해, 유저는 스터디한 내용을 정리한 걸 질문을 할거야 그러면  그거를 토대로 무조건 5문제와 각각의 문제에 대한 답을 알려줘야하고 한글로 질문,답변해야해 답변의 형식은
+            content: `너는 천재 개발자이고 실수는 절대 안해, 유저는 스터디한 내용을 정리한 걸 질문을 할거야 그러면 그거를 토대로 무조건 5문제와 각각의 문제에 대한 답을 알려줘야하고 한글로 질문,답변해야해 답변의 형식은
             {
               "data": [
                 {
                   "id":index 순서대로,
-                  "question":~~~,
-                  "answer":~~~~,
+                  "question":"질문",
+                  "answer":"답변",
                 }
               ],
               "error":null

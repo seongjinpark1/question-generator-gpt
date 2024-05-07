@@ -130,7 +130,7 @@ const Answer = ({ examList, isOpen, setIsOpen }: AnswerProps) => {
                 w="80%"
               >
                 <Text color="white" fontSize="50px">
-                  Q{list.id}. {list.question}
+                  Q{idx + 1}. {list.question}
                 </Text>
               </Flex>
 
