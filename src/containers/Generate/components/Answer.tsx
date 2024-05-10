@@ -70,8 +70,8 @@ const Answer = ({ examList, isOpen, setIsOpen }: AnswerProps) => {
         <Flex
           position="fixed"
           alignItems="center"
-          right={20}
-          top={20}
+          right={10}
+          top={10}
           zIndex={4}
           gap="10px"
         >

@@ -261,6 +261,13 @@
   dependencies:
     "@chakra-ui/shared-utils" "2.0.5"
 
+"@chakra-ui/icons@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/icons/-/icons-2.1.1.tgz#58ff0f9e703f2f4f89debd600ce4e438f43f9c9a"
+  integrity sha512-3p30hdo4LlRZTT5CwoAJq3G9fHI0wDc0pBaMHj4SUn0yomO+RcDRlzhdXqdr5cVnzax44sqXJVnf3oQG0eI+4g==
+  dependencies:
+    "@chakra-ui/icon" "3.2.0"
+
 "@chakra-ui/image@2.1.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@chakra-ui/image/-/image-2.1.0.tgz#6c205f1ca148e3bf58345b0b5d4eb3d959eb9f87"
@@ -347,6 +354,13 @@
     "@chakra-ui/transition" "2.1.0"
     aria-hidden "^1.2.3"
     react-remove-scroll "^2.5.6"
+
+"@chakra-ui/next-js@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/next-js/-/next-js-2.2.0.tgz#80959c19f7509802c21dd73e23c32c60d918e4c7"
+  integrity sha512-brCz0UEOlImX4Np2jDIaljZJkW6kiDSuXG5erxvYjZlklLhmti1zj0o1sSjt5yff1xndfgHoOJb+BYG5wx+vDg==
+  dependencies:
+    "@emotion/cache" "^11.11.0"
 
 "@chakra-ui/number-input@2.1.2":
   version "2.1.2"
@@ -721,7 +735,7 @@
     "@chakra-ui/react-context" "2.1.0"
     "@chakra-ui/shared-utils" "2.0.5"
 
-"@chakra-ui/styled-system@2.9.2":
+"@chakra-ui/styled-system@2.9.2", "@chakra-ui/styled-system@^2.9.2":
   version "2.9.2"
   resolved "https://registry.yarnpkg.com/@chakra-ui/styled-system/-/styled-system-2.9.2.tgz#898ab63da560a4a014f7b05fa7767e8c76da6d2f"
   integrity sha512-To/Z92oHpIE+4nk11uVMWqo2GGRS86coeMmjxtpnErmWRdLcp1WVCVRAvn+ZwpLiNR+reWFr2FFqJRsREuZdAg==
@@ -2789,10 +2803,10 @@ foreground-child@^3.1.0:
     cross-spawn "^7.0.0"
     signal-exit "^4.0.1"
 
-framer-motion@^11.1.7:
-  version "11.1.7"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-11.1.7.tgz#ad970c1296e7b5fb26db222fd65d1329aef115a6"
-  integrity sha512-cW11Pu53eDAXUEhv5hEiWuIXWhfkbV32PlgVISn7jRdcAiVrJ1S03YQQ0/DzoswGYYwKi4qYmHHjCzAH52eSdQ==
+framer-motion@^11.1.8:
+  version "11.1.8"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-11.1.8.tgz#4eb00899b454187e13e8b26b19634d78ee3893b4"
+  integrity sha512-W2OGZmNfUarhh6A/rLXernq/JthjekbgeRWqzigPpbaShe/+HfQKUDSjiEdL302XOlINtO+SCFCiR1hlqN3uOA==
   dependencies:
     tslib "^2.4.0"
 
@@ -4443,6 +4457,11 @@ use-sidecar@^1.1.2:
     detect-node-es "^1.1.0"
     tslib "^2.0.0"
 
+use-sync-external-store@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
+  integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
+
 util-deprecate@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
@@ -4584,3 +4603,10 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
+
+zustand@^4.5.2:
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.5.2.tgz#fddbe7cac1e71d45413b3682cdb47b48034c3848"
+  integrity sha512-2cN1tPkDVkwCy5ickKrI7vijSjPksFRfqS6237NzT0vqSsztTNnQdHw9mmN7uBdk3gceVXU0a+21jFzFzAc9+g==
+  dependencies:
+    use-sync-external-store "1.2.0"

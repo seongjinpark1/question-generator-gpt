@@ -19,6 +19,7 @@ const Home = () => {
       flexDirection="column"
       w="100%"
       h="100vh"
+      bg="#fcf8f5"
       position="relative"
       zIndex={2}
     >
