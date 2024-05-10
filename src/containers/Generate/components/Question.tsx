@@ -8,6 +8,12 @@ import Loading from '@/components/Loading';
 import formatDate from '@/utils/format/formatDate';
 
 import { getHistories, saveDb } from '@/firebase/firebaseApi';
+import CustomSelect from '@/components/CustomSelect';
+import { MENU_LIST } from '@/components/constants/constants';
+import {
+  QUIZ_PLACEHOLDER,
+  STUDY_PLACEHOLDER,
+} from '@/components/constants/placeholder';
 
 interface QuestionProps {
   setExamList: Dispatch<SetStateAction<ExamListProps | null>>;
@@ -20,6 +26,7 @@ const Question = ({
   setIsOpen,
   setHistoryList,
 }: QuestionProps) => {
+  const [selectType, setSelectType] = useState(MENU_LIST[0]);
   const [isPending, startTransition] = useTransition();
   const [inputValue, setInputValue] = useState('');
   const { date } = formatDate();
@@ -54,6 +61,7 @@ const Question = ({
           const data = await getGptAnswer({
             data: {
               question: inputValue,
+              type: selectType.value,
             },
           });
 
@@ -98,30 +106,33 @@ const Question = ({
           Question
         </Text>
 
-        <Button
-          border="1px solid"
-          borderRadius="16px"
-          px="16px"
-          h="32px"
-          bg="black"
-          cursor={isDisabled ? 'not-allowed' : 'pointer'}
-          _hover={{
-            opacity: '0.7',
-          }}
-          isDisabled={isDisabled}
-          _disabled={{
-            bg: '#CBD5E0',
-            border: 'none',
-          }}
-          isLoading={isPending}
-          _loading={{
-            color: 'white',
-            borderColor: 'black',
-          }}
-          onClick={handleFetch}
-        >
-          <Text color="white">Generate</Text>
-        </Button>
+        <Flex gap="10px">
+          <CustomSelect selectType={selectType} setSelectType={setSelectType} />
+          <Button
+            border="1px solid"
+            borderRadius="16px"
+            px="16px"
+            h="32px"
+            bg="black"
+            cursor={isDisabled ? 'not-allowed' : 'pointer'}
+            _hover={{
+              opacity: '0.7',
+            }}
+            isDisabled={isDisabled}
+            _disabled={{
+              bg: '#CBD5E0',
+              borderColor: '#CBD5E0',
+            }}
+            isLoading={isPending}
+            _loading={{
+              color: 'white',
+              borderColor: '#CBD5E0',
+            }}
+            onClick={handleFetch}
+          >
+            <Text color="white">Generate</Text>
+          </Button>
+        </Flex>
       </Flex>
       <Textarea
         w="100%"
@@ -131,6 +142,9 @@ const Question = ({
         borderColor="#e3e3e3"
         borderRadius="16px"
         fontSize="20px"
+        placeholder={
+          selectType.value === 'study' ? STUDY_PLACEHOLDER : QUIZ_PLACEHOLDER
+        }
         onChange={(e) => setInputValue(e.target.value)}
         value={inputValue}
         _focusVisible={{
