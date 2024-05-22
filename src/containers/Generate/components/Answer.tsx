@@ -11,10 +11,12 @@ import {
   SetStateAction,
   useCallback,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 import AnswerCount from './AnswerCount';
 import Swiper from 'swiper';
+import { STUDY_PEOPLE } from '@/constants/people';
 
 interface AnswerProps {
   examList: ExamListProps | null;
@@ -43,6 +45,23 @@ const Answer = ({ examList, isOpen, setIsOpen }: AnswerProps) => {
     setShowAnswer(new Array(examList?.data?.length).fill(false));
   };
 
+  const answerList = useMemo(() => {
+    let shuffledArray = STUDY_PEOPLE.slice();
+
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+
+      [shuffledArray[i], shuffledArray[j]] = [
+        shuffledArray[j],
+        shuffledArray[i],
+      ]; // 요소 교환
+    }
+
+    // const randomNumber = Math.floor(Math.random() * 4);
+    // shuffledArray.push(shuffledArray[randomNumber]);
+    return shuffledArray;
+  }, []);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isOpen) return;
@@ -69,36 +88,42 @@ const Answer = ({ examList, isOpen, setIsOpen }: AnswerProps) => {
       >
         <Flex
           position="fixed"
+          direction="column"
           alignItems="center"
           right={10}
           top={10}
           zIndex={4}
-          gap="10px"
+          gap="20px"
         >
-          <Center
-            bg="#F56565"
-            borderRadius="50%"
-            w="70px"
-            h="70px"
-            cursor="pointer"
-            onClick={handleReTry}
-          >
-            <Text fontSize="16px" fontWeight={500}>
-              ReTry
-            </Text>
-          </Center>
-          <Center
-            bg="#FAF089"
-            borderRadius="50%"
-            w="70px"
-            h="70px"
-            cursor="pointer"
-            onClick={handleShowAnswer}
-          >
-            <Text fontSize="16px" fontWeight={500}>
-              {showAnswer[activeIdx] ? 'Hide' : 'Answer'}
-            </Text>
-          </Center>
+          <Flex gap="10px">
+            <Center
+              bg="#F56565"
+              borderRadius="50%"
+              w="70px"
+              h="70px"
+              cursor="pointer"
+              onClick={handleReTry}
+            >
+              <Text fontSize="16px" fontWeight={500}>
+                ReTry
+              </Text>
+            </Center>
+            <Center
+              bg="#FAF089"
+              borderRadius="50%"
+              w="70px"
+              h="70px"
+              cursor="pointer"
+              onClick={handleShowAnswer}
+            >
+              <Text fontSize="16px" fontWeight={500}>
+                {showAnswer[activeIdx] ? 'Hide' : 'Answer'}
+              </Text>
+            </Center>
+          </Flex>
+          <Text color="yellow" fontSize="30px">
+            답변자: {answerList[activeIdx]}
+          </Text>
         </Flex>
         <SwiperWrapper
           keyboard
