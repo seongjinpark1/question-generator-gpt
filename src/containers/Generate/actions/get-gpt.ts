@@ -22,7 +22,7 @@ export async function getGptAnswer({ data }: getGptAnswerProps) {
         Authorization: `Bearer ${OPEN_AI_KEY}`,
       },
       body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-4o',
         messages: [
           ...GPT_MESSAGES[data.type],
           {
