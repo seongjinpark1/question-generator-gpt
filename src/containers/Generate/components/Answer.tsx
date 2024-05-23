@@ -1,5 +1,5 @@
 import { Box, Center, Flex, Text } from '@chakra-ui/react';
-import { ExamListProps } from '../Generate';
+import { QuestionListProps } from '../Generate';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -19,16 +19,20 @@ import Swiper from 'swiper';
 import { STUDY_PEOPLE } from '@/constants/people';
 
 interface AnswerProps {
-  examList: ExamListProps | null;
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  questionList: QuestionListProps | null;
+  isOpenQuestion: boolean;
+  setIsOpenQuestion: Dispatch<SetStateAction<boolean>>;
 }
-const Answer = ({ examList, isOpen, setIsOpen }: AnswerProps) => {
+const Answer = ({
+  questionList,
+  isOpenQuestion,
+  setIsOpenQuestion,
+}: AnswerProps) => {
   const [swiperEvent, setSwiperEvent] = useState<Swiper>();
 
   const [activeIdx, setActiveIdx] = useState(0);
   const [showAnswer, setShowAnswer] = useState<boolean[]>(
-    new Array(examList?.data?.length).fill(false)
+    new Array(questionList?.data?.length).fill(false)
   );
 
   const handleShowAnswer = useCallback(() => {
@@ -39,17 +43,17 @@ const Answer = ({ examList, isOpen, setIsOpen }: AnswerProps) => {
   }, [activeIdx, showAnswer]);
 
   const handleReTry = () => {
-    setIsOpen(false);
+    setIsOpenQuestion(false);
     setActiveIdx(0);
     swiperEvent?.slideTo(0);
-    setShowAnswer(new Array(examList?.data?.length).fill(false));
+    setShowAnswer(new Array(questionList?.data?.length).fill(false));
   };
 
   const answerList = useMemo(() => {
     let copyStudyPeople = STUDY_PEOPLE.slice();
     const shuffledArray: string[] = [];
 
-    examList?.data?.forEach(() => {
+    questionList?.data?.forEach(() => {
       if (copyStudyPeople.length === 0) {
         copyStudyPeople = STUDY_PEOPLE.slice();
       }
@@ -59,21 +63,21 @@ const Answer = ({ examList, isOpen, setIsOpen }: AnswerProps) => {
     });
 
     return shuffledArray;
-  }, [examList?.data]);
+  }, [questionList?.data]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isOpen) return;
+      if (!isOpenQuestion) return;
       if (e.key === ' ') {
         handleShowAnswer();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleShowAnswer, isOpen]);
+  }, [handleShowAnswer, isOpenQuestion]);
 
   return (
-    <Box display={isOpen ? 'block' : 'none'}>
+    <Box display={isOpenQuestion ? 'block' : 'none'}>
       <Box
         className="container"
         w="100%"
@@ -134,7 +138,7 @@ const Answer = ({ examList, isOpen, setIsOpen }: AnswerProps) => {
           onBeforeInit={(e) => setSwiperEvent(e)}
           onSlideChange={(e) => setActiveIdx(e.activeIndex)}
         >
-          {examList?.data?.map((list, idx) => (
+          {questionList?.data?.map((list, idx) => (
             <SwiperSlide
               key={idx}
               style={{
@@ -183,7 +187,7 @@ const Answer = ({ examList, isOpen, setIsOpen }: AnswerProps) => {
           ))}
         </SwiperWrapper>
         <AnswerCount
-          count={examList?.data?.length || 0}
+          count={questionList?.data?.length || 0}
           currentIdx={activeIdx + 1}
         />
       </Box>

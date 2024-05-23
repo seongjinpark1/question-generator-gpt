@@ -1,5 +1,5 @@
 'use client';
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, Spinner } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import History from './components/History';
 
@@ -7,7 +7,7 @@ import Question from './components/Question';
 import Answer from './components/Answer';
 import { useState } from 'react';
 
-export interface ExamListProps {
+export interface QuestionListProps {
   data: ExamItemProps[] | null;
   error: null | string;
 }
@@ -18,19 +18,21 @@ interface ExamItemProps {
   answer: string;
 }
 
-export interface HistoryListProps {
+export interface HistoryItemProps {
   id: string;
   content: {
     question: string;
-    answer: ExamListProps;
+    answer: QuestionListProps;
   };
   created_at: string;
 }
 
 const Generate = () => {
-  const [historyList, setHistoryList] = useState<HistoryListProps[]>([]);
-  const [examList, setExamList] = useState<ExamListProps | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [historyList, setHistoryList] = useState<HistoryItemProps[]>([]);
+  const [questionList, setQuestionList] = useState<QuestionListProps | null>(
+    null
+  );
+  const [isOpenQuestion, setIsOpenQuestion] = useState(false);
 
   return (
     <>
@@ -42,19 +44,23 @@ const Generate = () => {
         >
           <Flex w="100%" h="100vh" bg="white">
             <History
-              setExamList={setExamList}
-              setIsOpen={setIsOpen}
+              setQuestionList={setQuestionList}
+              setIsOpenQuestion={setIsOpenQuestion}
               historyList={historyList}
               setHistoryList={setHistoryList}
             />
             <Question
-              setExamList={setExamList}
-              setIsOpen={setIsOpen}
+              setQuestionList={setQuestionList}
+              setIsOpenQuestion={setIsOpenQuestion}
               setHistoryList={setHistoryList}
             />
           </Flex>
         </motion.div>
-        <Answer examList={examList} isOpen={isOpen} setIsOpen={setIsOpen} />
+        <Answer
+          questionList={questionList}
+          isOpenQuestion={isOpenQuestion}
+          setIsOpenQuestion={setIsOpenQuestion}
+        />
       </Box>
     </>
   );

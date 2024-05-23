@@ -2,30 +2,32 @@ import { Flex, Button, Textarea, Text } from '@chakra-ui/react';
 
 import { Dispatch, SetStateAction, useState, useTransition } from 'react';
 import { getGptAnswer } from '../actions/get-gpt';
-import { ExamListProps, HistoryListProps } from '../Generate';
+import { HistoryItemProps, QuestionListProps } from '../Generate';
 import Loading from '@/components/Loading';
 
 import formatDate from '@/utils/format/formatDate';
 
-import { getHistories, saveDb } from '@/firebase/firebaseApi';
+import { saveDb } from '@/firebase/firebaseApi';
 import CustomSelect from '@/components/CustomSelect';
 import { MENU_LIST } from '@/components/constants/constants';
 import {
   QUIZ_PLACEHOLDER,
   STUDY_PLACEHOLDER,
 } from '@/components/constants/placeholder';
+import useGetHistory from '@/hooks/useGetHistory';
 
 interface QuestionProps {
-  setExamList: Dispatch<SetStateAction<ExamListProps | null>>;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-  setHistoryList: Dispatch<SetStateAction<HistoryListProps[]>>;
+  setQuestionList: Dispatch<SetStateAction<QuestionListProps | null>>;
+  setIsOpenQuestion: Dispatch<SetStateAction<boolean>>;
+  setHistoryList: Dispatch<SetStateAction<HistoryItemProps[]>>;
 }
 let count = 0;
 const Question = ({
-  setExamList,
-  setIsOpen,
+  setQuestionList,
+  setIsOpenQuestion,
   setHistoryList,
 }: QuestionProps) => {
+  const { handleGetHistory } = useGetHistory();
   const [selectType, setSelectType] = useState(MENU_LIST[0]);
   const [isPending, startTransition] = useTransition();
   const [inputValue, setInputValue] = useState('');
@@ -39,19 +41,6 @@ const Question = ({
     }
     handleFetch();
     count++;
-  };
-
-  const handleGetHistory = () => {
-    startTransition(async () => {
-      const res = await getHistories();
-      const sortDate = res.toSorted((item1, item2) => {
-        return (
-          Number(new Date(item2.created_at)) -
-          Number(new Date(item1.created_at))
-        );
-      });
-      setHistoryList(sortDate);
-    });
   };
 
   const handleFetch = () => {
@@ -68,7 +57,7 @@ const Question = ({
           const parseData = JSON.parse(data);
 
           if (!parseData.error) {
-            setIsOpen(true);
+            setIsOpenQuestion(true);
           }
           if (parseData.error) {
             alert(parseData.error);
@@ -85,11 +74,11 @@ const Question = ({
     }
   };
 
-  const onSuccess = (parseData: ExamListProps) => {
-    setExamList(parseData);
+  const onSuccess = (parseData: QuestionListProps) => {
+    setQuestionList(parseData);
     setInputValue('');
     saveDb(parseData, date, inputValue);
-    handleGetHistory();
+    handleGetHistory(setHistoryList);
   };
 
   return (

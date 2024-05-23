@@ -1,4 +1,4 @@
-import { Box, Center } from '@chakra-ui/react';
+import { Box, Center, Spinner } from '@chakra-ui/react';
 import Image from 'next/image';
 
 const Loading = () => {
@@ -22,7 +22,7 @@ const Loading = () => {
         transform="translate(-50%, -50%)"
         zIndex={99}
       >
-        <Image src="/images/Loading.gif" alt="loading" width={80} height={80} />
+        <Spinner size="lg" color="#fcbf49" />
       </Box>
     </>
   );
