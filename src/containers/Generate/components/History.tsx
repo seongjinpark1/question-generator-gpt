@@ -42,7 +42,7 @@ const History = ({
   return (
     <>
       <Flex
-        bg="#F9F9F9"
+        bg="#fcf8f5"
         flex={1}
         borderRadius="16px 0 0 16px"
         p="32px 16px"

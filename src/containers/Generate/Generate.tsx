@@ -42,7 +42,7 @@ const Generate = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <Flex w="100%" h="100vh" bg="white">
+          <Flex w="100%" h="calc(100vh - 70px)" bg="white">
             <History
               setQuestionList={setQuestionList}
               setIsOpenQuestion={setIsOpenQuestion}

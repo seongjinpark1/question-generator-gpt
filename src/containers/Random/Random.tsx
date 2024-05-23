@@ -17,12 +17,12 @@ const Random = () => {
   };
 
   return (
-    <Center h="100vh">
+    <Center h="calc(100vh - 70px)">
       {isStart ? (
         <RandomCards mixProduct={mixProduct} />
       ) : (
         <Center
-          bg="black"
+          bg="#d5bdaf"
           w="300px"
           h="100px"
           textAlign="center"

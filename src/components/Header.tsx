@@ -16,6 +16,7 @@ const Header = () => {
           w="100%"
           h="70px"
           py="5px"
+          bg="#fcf8f5"
           justifyContent="center"
           position="fixed"
           top="0"

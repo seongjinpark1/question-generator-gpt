@@ -22,18 +22,24 @@ const RandomCards = ({ mixProduct }: RandomCardsProps) => {
     setMixPeople(shuffledArray);
   };
   return (
-    <Center gap="10px" w="100%" h="100vh" px="20px" position="relative">
+    <Center
+      gap="10px"
+      w="100%"
+      h="calc(100vh - 70px)"
+      px="20px"
+      position="relative"
+    >
       <Button
         position="absolute"
         top="50px"
         left="50%"
         transform="translateX(-50%)"
-        bg="#f5ebe0"
+        bg="#e3d5ca"
         w="150px"
         h="50px"
         onClick={handleRandomPeople}
       >
-        <Text>섞기</Text>
+        <Text fontSize="20px">MIX</Text>
       </Button>
       {mixPeople.map((person, idx) => {
         return (
@@ -50,7 +56,7 @@ const RandomCards = ({ mixProduct }: RandomCardsProps) => {
               position="absolute"
               w="100%"
               h="100%"
-              bg="black"
+              bg="#d6ccc2"
               borderRadius="8px"
               cursor="pointer"
               opacity={cardOpacity[idx]}

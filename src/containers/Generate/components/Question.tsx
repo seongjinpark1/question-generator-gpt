@@ -99,10 +99,11 @@ const Question = ({
           <CustomSelect selectType={selectType} setSelectType={setSelectType} />
           <Button
             border="1px solid"
+            borderColor="#e3d5ca"
             borderRadius="16px"
             px="16px"
             h="32px"
-            bg="black"
+            bg="#e3d5ca"
             cursor={isDisabled ? 'not-allowed' : 'pointer'}
             _hover={{
               opacity: '0.7',
