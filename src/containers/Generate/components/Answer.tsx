@@ -46,21 +46,20 @@ const Answer = ({ examList, isOpen, setIsOpen }: AnswerProps) => {
   };
 
   const answerList = useMemo(() => {
-    let shuffledArray = STUDY_PEOPLE.slice();
+    let copyStudyPeople = STUDY_PEOPLE.slice();
+    const shuffledArray: string[] = [];
 
-    for (let i = shuffledArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
+    examList?.data?.forEach(() => {
+      if (copyStudyPeople.length === 0) {
+        copyStudyPeople = STUDY_PEOPLE.slice();
+      }
+      const randomNum = Math.floor(Math.random() * copyStudyPeople.length);
+      const select = copyStudyPeople.splice(randomNum, 1)[0];
+      shuffledArray.push(select);
+    });
 
-      [shuffledArray[i], shuffledArray[j]] = [
-        shuffledArray[j],
-        shuffledArray[i],
-      ]; // 요소 교환
-    }
-
-    // const randomNumber = Math.floor(Math.random() * 4);
-    // shuffledArray.push(shuffledArray[randomNumber]);
     return shuffledArray;
-  }, []);
+  }, [examList?.data]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

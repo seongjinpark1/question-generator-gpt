@@ -1,4 +1,5 @@
 import { STUDY_PEOPLE } from '@/constants/people';
+import Shuffled from '@/utils/shuffled';
 import { Button, Center, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 
@@ -16,16 +17,7 @@ const RandomCards = ({ mixProduct }: RandomCardsProps) => {
   };
 
   const handleRandomPeople = () => {
-    let shuffledArray = STUDY_PEOPLE.slice();
-
-    for (let i = shuffledArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-
-      [shuffledArray[i], shuffledArray[j]] = [
-        shuffledArray[j],
-        shuffledArray[i],
-      ]; // 요소 교환
-    }
+    const shuffledArray = Shuffled(STUDY_PEOPLE);
 
     setMixPeople(shuffledArray);
   };

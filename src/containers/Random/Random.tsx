@@ -2,24 +2,17 @@
 import { Center, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 import RandomCards from './components/RandomCards';
+import Shuffled from '@/utils/shuffled';
 
 const productList = ['PASS', 'PASS', 'PASS', '발표 당첨!!'];
+
 const Random = () => {
   const [isStart, setIsStart] = useState(false);
   const [mixProduct, setMixProduct] = useState(['']);
+
   const handleRandom = () => {
     setIsStart(true);
-
-    let shuffledArray = productList.slice();
-    for (let i = shuffledArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-
-      [shuffledArray[i], shuffledArray[j]] = [
-        shuffledArray[j],
-        shuffledArray[i],
-      ];
-    }
-
+    const shuffledArray = Shuffled(productList);
     setMixProduct(shuffledArray);
   };
 
