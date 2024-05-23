@@ -25,14 +25,11 @@ const Home = () => {
         justifyContent="center"
         transform="translateX(-50%)"
       >
-        <Text fontSize="60px" fontWeight={500}>
-          STUDY GPT
-        </Text>
         <Image
-          src="/images/cute-robot.webp"
+          src="/images/logo.png"
           alt="robot"
-          width={100}
-          height={100}
+          width={200}
+          height={200}
           priority
         />
       </Flex>
