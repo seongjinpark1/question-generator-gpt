@@ -23,6 +23,7 @@ export async function getGptAnswer({ data }: getGptAnswerProps) {
       },
       body: JSON.stringify({
         model: 'gpt-4o',
+        // model: 'gpt-3.5-turbo-0125',
         messages: [
           ...GPT_MESSAGES[data.type],
           {
